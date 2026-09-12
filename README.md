@@ -1,79 +1,63 @@
-# Face Mask Detection — Arduino Nano 33 BLE Sense
+# Face Mask Detection
 
-**EE 446: Tiny Machine Learning for Ultra Low-Power Edge Computing | University of Washington, Spring 2026**
+Edge Impulse firmware export for an EE 446 TinyML Lab 4 face-mask detection project.
 
-Real-time face mask detection ("with mask" vs "without mask") from the onboard camera-equivalent image pipeline, built entirely in Edge Impulse Studio and deployed to an Arduino Nano 33 BLE Sense.
+The checked-in firmware identifies the model author as `sdadhich` and the model name as `Mask Detection`. The included report labels the task with `Without mask` and `With mask on` examples and links to the public Edge Impulse project.
 
----
+## What Is Included
 
-## What it does
+- `Lab4_EE446.pdf`: one-page project report.
+- `firmware/firmware-arduino-nano-33-ble-sense.ino.bin`: prebuilt firmware image.
+- `firmware/firmware-arduino-nano-33-ble-sense.ino.with_bootloader.bin`: prebuilt firmware image with bootloader.
+- `firmware/flash_windows.bat`: Windows flashing script.
+- `firmware/flash_mac.command`: macOS flashing script.
+- `firmware/flash_linux.sh`: Linux flashing script.
 
-Classifies a captured image as **With Mask** or **Without Mask** using an image classification model trained in Edge Impulse Studio, then compiled to firmware for the Nano 33 BLE Sense.
+This repository does not include local training notebooks, model source code, or the training image dataset.
 
-Unlike the other labs in this course, this project's full pipeline (data upload, transfer learning, model training, and firmware export) was built and run entirely within Edge Impulse Studio — there is no local Python notebook. The public Edge Impulse project is linked below.
+## Hardware And Tools
 
----
+- Arduino Nano 33 BLE Sense.
+- Arduino CLI available on `PATH`.
+- Arduino Mbed Nano core, installed by the flash scripts if missing.
+- Edge Impulse CLI tools for running the flashed impulse from a computer.
 
-## Repository contents
+The flash scripts expect Arduino CLI 0.33.x or newer and upload with the Arduino Nano 33 BLE board FQBN.
 
-```
-Lab4_EE446.pdf     ← Written report
-firmware/           ← Edge Impulse-compiled firmware for Arduino Nano 33 BLE Sense
-  firmware-arduino-nano-33-ble-sense.ino.bin
-  firmware-arduino-nano-33-ble-sense.ino.with_bootloader.bin
-  flash_windows.bat / flash_mac.command / flash_linux.sh
-```
+## Flash The Firmware
 
----
-
-## Dataset
-
-Trained on a face-mask image classification dataset (~11,800 images: 10,000 train / ~1,000 test / 800 validation, split evenly between `WithMask` and `WithoutMask` classes). The dataset is not included in this repo due to size — it's the widely-used public "Face Mask 12K Images" dataset available on Kaggle. To retrain, download a similarly-structured with-mask / without-mask image dataset and upload it to the Edge Impulse project below.
-
----
-
-## Edge Impulse project
-
-- **Project:** [sdadhich / EE446 Lab 4](https://studio.edgeimpulse.com/public/972594/live) (public — clone to retrain or redeploy)
-
----
-
-## Quick start
-
-### Flash the pre-built firmware
+Connect the Arduino Nano 33 BLE Sense, then run the script for your platform:
 
 ```bash
 # Windows
 firmware\flash_windows.bat
 
-# Mac
+# macOS
 firmware/flash_mac.command
 
 # Linux
 bash firmware/flash_linux.sh
 ```
 
-### Retrain
+After flashing, the scripts print these Edge Impulse commands:
 
-1. Clone the [Edge Impulse project](https://studio.edgeimpulse.com/public/972594/live)
-2. Upload your own with-mask / without-mask image dataset (or reuse the Kaggle dataset referenced above)
-3. Retrain the impulse in Edge Impulse Studio
-4. Deploy → build firmware for Arduino Nano 33 BLE Sense → flash using the scripts above
+```bash
+edge-impulse-daemon
+edge-impulse-run-impulse
+```
 
----
+## Edge Impulse Project
 
-## Hardware
+The included report links to this public Edge Impulse project:
 
-- **Arduino Nano 33 BLE Sense** (Nordic nRF52840, 1 MB flash, 256 KB RAM)
+https://studio.edgeimpulse.com/public/972594/live
 
----
+## Credits
 
-## Authors
-
-Sparsh Dadhich — University of Washington, ECE / Neuroscience
-
----
+- Sparsh Dadhich
+- University of Washington EE 446 Tiny Machine Learning
+- Firmware generated with Edge Impulse for Arduino Nano 33 BLE Sense
 
 ## License
 
-MIT — see [LICENSE](LICENSE). This covers the author's own code, notebooks, and documentation in this repo.
+This repository is licensed under the MIT License. See `LICENSE`.
